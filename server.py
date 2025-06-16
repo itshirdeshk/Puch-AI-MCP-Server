@@ -9,6 +9,7 @@ from openai import BaseModel
 from pydantic import AnyUrl, Field
 import readabilipy
 from pathlib import Path
+import os
 
 TOKEN = "a10062697c47"  # Replace with your actual application key
 MY_NUMBER = "917252995449"  # Replace with your phone number in {country_code}{number} format
@@ -156,7 +157,8 @@ async def fetch(
 
 
 async def main():
-    await mcp.run_async("streamable-http", host="0.0.0.0", port=8085)
+    port = int(os.environ.get("PORT", 8085))
+    await mcp.run_async("streamable-http", host="0.0.0.0", port=port)
 
 
 if __name__ == "__main__":
